@@ -1,5 +1,5 @@
 CHANGELOG:  
   
-v2.00:  
+v1.0.0:  
 -Initial release
   
