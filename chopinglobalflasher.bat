@@ -1,5 +1,5 @@
 @echo off
-set ver=2.00
+set ver=1.0.0
 set debug=0
 
 :head
