@@ -1,5 +1,5 @@
 @echo off
-set ver=1.0.0
+set ver=1.0.1
 set debug=0
 
 :head
@@ -76,6 +76,7 @@ echo If you want to do flash a different region ROM, you should erase USERDATA.
 set /P c=Do you want to ERASE USERDATA [Y/N]?
 if /I "%c%" EQU "Y" goto erase
 if /I "%c%" EQU "N" goto noterase
+if /I "%c%" EQU "D" goto debug
 goto userdata
 
 :erase
@@ -97,21 +98,22 @@ set /P r=Select the MIUI version of the rom to be flashed and press Enter [14/13
 if /I "%r%" EQU "14" goto startflashing14
 if /I "%r%" EQU "13" goto startflashing13
 if /I "%r%" EQU "12" goto startflashing12
+if /I "%c%" EQU "D" goto debug
 goto romselect
 
 :startflashing14
 echo Flashing MIUI 14...
-:: Add MIUI 14 specific flash commands there if exists
+:: Add MIUI %c% specific flash commands there if exists
 goto startflashing
 
 :startflashing13
 echo Flashing MIUI 13...
-:: Add MIUI 13 specific flash commands there if exists
+:: Add MIUI %c% specific flash commands there if exists
 goto startflashing
 
 :startflashing12
 echo Flashing MIUI 12...
-:: Add MIUI 12 specific flash commands there if exists
+:: Add MIUI %c% specific flash commands there if exists
 goto startflashing
 
 :startflashing
@@ -156,6 +158,7 @@ goto verityconfirm
 set /P c=Do you want to DISABLE VERITY [Y/N]?
 if /I "%c%" EQU "Y" goto verity
 if /I "%c%" EQU "N" goto notverity
+if /I "%c%" EQU "D" goto debug
 goto verityconfirm
 
 :verity
