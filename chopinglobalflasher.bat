@@ -1,5 +1,5 @@
 @echo off
-set ver=1.1.0
+set ver=1.1.1
 set debug=0
 
 :head
@@ -294,5 +294,5 @@ echo %msg_reboot%
 if not "%debug%"=="1" (
  fastboot reboot
 )
-pause
+pause > nul
 exit
