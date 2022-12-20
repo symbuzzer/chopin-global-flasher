@@ -4,8 +4,8 @@ v1.1.1: (Upcoming)
 -Cleaned exit command  
   
 v1.1.0:  
--Added bootloader lock functions  
--Added infrastructure for multi-language
+-Added bootloader lock function  
+-Added infrastructure for multi-language  
 -Added Turkish language  
 -Added Indonesian language  
   
