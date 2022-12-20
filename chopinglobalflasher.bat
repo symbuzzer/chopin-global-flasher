@@ -1,5 +1,5 @@
 @echo off
-set ver=1.0.1
+set ver=1.1.0
 set debug=0
 
 :head
@@ -10,29 +10,118 @@ if not "%debug%"=="1" (
  color 0c
  set titlestring=[DEBUG] 
 )
-title %titlestring%Chopin MIUI 14 / 13 / 12 Flasher Script v%ver% by Ali BEYAZ
-echo.
-echo Welcome to Chopin Global Flasher Script. Do it at your own risk.
-echo Go fastboot mode on your phone to begin.
-echo.
-goto romconfirm
+title %titlestring%Chopin MIUI 14 / 13 / 12 Flasher Script v%ver% - avalibeyaz.com/github
+cls
+goto lang
 
-:romconfirm
-set /P c=Do you want to check ROM files [Y/N]?
-if /I "%c%" EQU "Y" goto checkromfiles
-if /I "%c%" EQU "N" goto notcheckromfiles
-if /I "%c%" EQU "D" goto debug
-goto romconfirm
+:lang
+cls
+echo.
+echo 1 - English
+echo 2 - Turkish
+echo 3 - Indonesian
+echo.
+set /P l=
+if /I "%l%" EQU "1" goto english
+if /I "%l%" EQU "2" goto turkish
+if /I "%l%" EQU "3" goto indonesian
+if /I "%l%" EQU "D" goto debug
+goto lang
+
+:english
+set msg_welcome=Welcome to Chopin Global Flasher Script. Do it at your own risk.
+set msg_fastboot=Go fastboot mode on your phone to begin.
+set msg_checkrom=Do you want to check ROM files [Y/N]?
+set msg_romok=ROM files are OK!
+set msg_romskip=Skipped checking ROM files!
+set msg_askuserdata1=If you want to do flash a different region ROM, you should erase USERDATA.
+set msg_askuserdata2=Do you want to ERASE USERDATA [Y/N]?
+set msg_erasinguserdata=Erasing USERDATA!
+set msg_savinguserdata=Saving USERDATA!
+set msg_selectversion=Select the MIUI version of the rom to be flashed and press Enter [14/13/12]:
+set msg_flashing=Flashing MIUI...
+set msg_success=Success!
+set msg_askverity=Do you want to DISABLE VERITY [Y/N]?
+set msg_verity=Verity disabled!
+set msg_notverity=Verity not disabled!
+set msg_askbllock=Do you want to LOCK BOOTLOADER [Y/N]?
+set msg_bllock=Bootloader locked!
+set msg_notbllock=Bootloader lock skipped!
+set msg_romerr1=Make sure extract "images" folder of fastboot ROM's tgz file and rerun script again.
+set msg_romerr2=You can open fastboot ROM's tgz file via Winrar.
+set msg_reboot=Press Enter to reboot your phone...
+goto welcome
+
+:turkish
+set msg_welcome=Chopin Global Flasher Script'ine hos geldiniz. Sorumluluk size aittir.
+set msg_fastboot=Baslamak icin telefonunuzda Fastboot'u acin.
+set msg_checkrom=ROM dosyalarini kontrol etmek ister misiniz [Y/N]?
+set msg_romok=ROM dosyalari OK!
+set msg_romskip=ROM dosyalari kontrolu gecildi!
+set msg_askuserdata1=Eger baska bir bolgeye ait ROM yukleyecekseniz USERDATA'yi formatlamaniz gerekiyor.
+set msg_askuserdata2=USERDATA'yi formatlamak ister misiniz [Y/N]?
+set msg_erasinguserdata=USERDATA siliniyor!
+set msg_savinguserdata=USERDATA silinmedi!
+set msg_selectversion=Yuklenecek MIUI versiyonunu secip Enter'e basin [14/13/12]:
+set msg_flashing=MIUI yukleniyor...
+set msg_success=Basarili!
+set msg_askverity=VERITY'i kapatmak ister misiniz [Y/N]?
+set msg_verity=Verity kapatildi!
+set msg_notverity=Verity kapatilmadi!
+set msg_askbllock=BOOTLOADER kilitlensin mi [Y/N]?
+set msg_bllock=Bootloader kilitlendi!
+set msg_notbllock=Bootloader kilitlenmedi!
+set msg_romerr1=Fastboot ROM'unun tgz dosyasindaki "images" klasorunu cikarttiğiniza emin olun ve skripti tekrar calistirin.
+set msg_romerr2=Fastboot ROM'unun tgz dosyasini Winrar ile acabilirsiniz.
+set msg_reboot=Telefonunuzu yeniden baslatmak icin Enter'a basin...
+goto welcome
+
+:indonesian
+set msg_welcome=Selamat datang di Chopin Global Flasher Script. Lakukan dengan risiko Anda sendiri.
+set msg_fastboot=Pergi mode fastboot di ponsel Anda untuk memulai.
+set msg_checkrom=Apakah Anda ingin memeriksa file ROM [Y/N]?
+set msg_romok=File ROM OK!
+set msg_romskip=Lewati pemeriksaan file ROM!
+set msg_askuserdata1=Jika Anda ingin melakukan flash ROM wilayah yang berbeda, Anda harus menghapus USERDATA.
+set msg_askuserdata2=Apakah Anda ingin MENGHAPUS USERDATA [Y/N]?
+set msg_erasinguserdata=Menghapus USERDATA!
+set msg_savinguserdata=Menyimpan USERDATA!
+set msg_selectversion=Pilih versi MIUI dari rom yang akan di-flash dan tekan Enter [14/13/12]:
+set msg_flashing=Flash MIUI...
+set msg_success=Berhasil!
+set msg_askverity=Apakah Anda ingin MENONAKTIFKAN VERITAS [Y/N]?
+set msg_verity=Verity dinonaktifkan!
+set msg_notverity=Verity tidak dinonaktifkan!
+set msg_askbllock=Apakah Anda ingin MENGUNCI BOOTLOADER [Y/N]?
+set msg_bllock=Bootloader terkunci!
+set msg_notbllock=Kunci bootloader dilewati!
+set msg_romerr1=Pastikan ekstrak folder "images" dari file tgz ROM fastboot dan jalankan kembali skrip.
+set msg_romerr2=Anda dapat membuka file tgz fastboot ROM melalui Winrar.
+set msg_reboot=Tekan Enter untuk mem-boot ulang ponsel Anda...
+goto welcome
 
 :debug
 if not "%debug%"=="1" (
  set debug=1
- cls
 ) else (
  set debug=0
- cls
 )
 goto head
+
+:welcome
+cls
+echo.
+echo %msg_welcome%
+echo %msg_fastboot%
+echo.
+goto romconfirm
+
+:romconfirm
+set /P c=%msg_checkrom%
+if /I "%c%" EQU "Y" goto checkromfiles
+if /I "%c%" EQU "N" goto notcheckromfiles
+if /I "%c%" EQU "D" goto debug
+goto romconfirm
 
 :checkromfiles
 if not "%debug%"=="1" (
@@ -63,24 +152,24 @@ if not "%debug%"=="1" (
  if not exist images\userdata.img goto notfound
  if not exist images\boot.img goto notfound
 )
-echo ROM files are OK
+echo %msg_romok%
 goto userdata
 
 :notcheckromfiles
-echo Skipped checking ROM files
+echo %msg_romskip%
 goto userdata
 
 :userdata
 echo.
-echo If you want to do flash a different region ROM, you should erase USERDATA.
-set /P c=Do you want to ERASE USERDATA [Y/N]?
+echo %msg_askuserdata1%
+set /P c=%msg_askuserdata2%
 if /I "%c%" EQU "Y" goto erase
 if /I "%c%" EQU "N" goto noterase
 if /I "%c%" EQU "D" goto debug
 goto userdata
 
 :erase
-echo Erasing USERDATA
+echo %msg_erasinguserdata%
 if not "%debug%"=="1" (
  fastboot erase metadata || @echo "Erase metadata error"
  fastboot flash userdata images\userdata.img || @echo "Flash userdata error"
@@ -89,12 +178,12 @@ echo.
 goto romselect
 
 :noterase
-echo Saving USERDATA
+echo %msg_savinguserdata%
 echo.
 goto romselect
 
 :romselect
-set /P r=Select the MIUI version of the rom to be flashed and press Enter [14/13/12]:
+set /P r=%msg_selectversion%
 if /I "%r%" EQU "14" goto startflashing14
 if /I "%r%" EQU "13" goto startflashing13
 if /I "%r%" EQU "12" goto startflashing12
@@ -102,17 +191,17 @@ if /I "%c%" EQU "D" goto debug
 goto romselect
 
 :startflashing14
-echo Flashing MIUI 14...
+echo %msg_flashing%
 :: Add MIUI %c% specific flash commands there if exists
 goto startflashing
 
 :startflashing13
-echo Flashing MIUI 13...
+echo %msg_flashing%
 :: Add MIUI %c% specific flash commands there if exists
 goto startflashing
 
 :startflashing12
-echo Flashing MIUI 12...
+echo %msg_flashing%
 :: Add MIUI %c% specific flash commands there if exists
 goto startflashing
 
@@ -150,12 +239,12 @@ if not "%debug%"=="1" (
  fastboot reboot || @echo "Reboot error"
 )
 echo.
-echo Success!
+echo %msg_success%
 echo.
 goto verityconfirm
 
 :verityconfirm
-set /P c=Do you want to DISABLE VERITY [Y/N]?
+set /P c=%msg_askverity%
 if /I "%c%" EQU "Y" goto verity
 if /I "%c%" EQU "N" goto notverity
 if /I "%c%" EQU "D" goto debug
@@ -165,23 +254,43 @@ goto verityconfirm
 if not "%debug%"=="1" (
  fastboot flash vbmeta --disable-verity --disable-verification vbmeta.img || @echo "Disable verity is not success. Check vbmeta.img"
 )
-echo Verity disabled!
+echo %msg_verity%
+echo.
+goto bllockconfirm
+
+:notverity
+echo %msg_notverity%
+echo.
+goto bllockconfirm
+
+:bllockconfirm
+set /P c=%msg_askbllock%
+if /I "%c%" EQU "Y" goto bllock
+if /I "%c%" EQU "N" goto notbllock
+if /I "%c%" EQU "D" goto debug
+goto bllockconfirm
+
+:bllock
+if not "%debug%"=="1" (
+ fastboot flash oem lock || @echo "Bootloader lock error"
+)
+echo %msg_bllock%
 echo.
 goto exit
 
 :notverity
-echo Verity not disabled!
+echo %msg_notbllock%
 echo.
 goto exit
 
 :notfound
-echo Make sure extract "images" folder of fastboot ROM's tgz file and rerun script again.
-echo You can open fastboot ROM's tgz file via Winrar.
+echo %msg_romerr1%
+echo %msg_romerr2%
 pause
 exit
 
 :exit
-echo Press Enter to reboot your phone
+echo %msg_reboot%
 if not "%debug%"=="1" (
  fastboot reboot
 )
