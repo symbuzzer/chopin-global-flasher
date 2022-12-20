@@ -1,5 +1,8 @@
 CHANGELOG:  
   
+v1.1.1: (Upcoming)  
+-Cleaned exit command  
+  
 v1.1.0:  
 -Added bootloader lock functions  
 -Added infrastructure for multi-language
