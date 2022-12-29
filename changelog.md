@@ -1,6 +1,7 @@
 CHANGELOG:  
   
-v1.1.1: (Upcoming)  
+v1.2.0:  
+-Added VIETSUB CFW compatibility  
 -Cleaned exit command  
   
 v1.1.0:  
