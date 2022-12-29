@@ -1,5 +1,5 @@
 @echo off
-set ver=1.1.1
+set ver=1.2.0
 set debug=0
 
 :head
@@ -143,7 +143,9 @@ if not "%debug%"=="1" (
  if not exist images\cam_vpu2.img goto notfound
  if not exist images\cam_vpu3.img goto notfound
  if not exist images\audio_dsp.img goto notfound
- if not exist images\super.img goto notfound
+ if not exist images\super.img (
+  if not exist images\bhlnk.img goto notfound
+ )
  if not exist images\rescue.img goto notfound
  if not exist images\cust.img goto notfound
  if not exist images\vbmeta.img goto notfound
@@ -227,7 +229,12 @@ if not "%debug%"=="1" (
  fastboot flash cam_vpu2_ab images\cam_vpu2.img || @echo "Flash cam_vpu2_ab error"
  fastboot flash cam_vpu3_ab images\cam_vpu3.img || @echo "Flash cam_vpu3_ab error"
  fastboot flash audio_dsp_ab images\audio_dsp.img  || @echo "Flash audio_dsp error"
- fastboot flash super images\super.img || @echo "Flash super error"
+ if exist images\super.img (
+  fastboot flash super images\super.img || @echo "Flash super error"
+ )
+ if exist images\bhlnk.img (
+  fastboot flash super images\bhlnk.img || @echo "Flash bhlnk error"
+ )
  fastboot flash rescue images\rescue.img || @echo "Flash rescue error"
  fastboot flash vbmeta_ab images\vbmeta.img || @echo "Flash vbmeta_ab error"
  fastboot flash vbmeta_system_ab images\vbmeta_system.img || @echo "Flash vbmeta_system_ab error"
