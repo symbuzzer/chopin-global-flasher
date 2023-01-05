@@ -1,5 +1,5 @@
 @echo off
-set ver=1.2.0
+set ver=1.2.1
 set debug=0
 
 :head
@@ -11,7 +11,6 @@ if not "%debug%"=="1" (
  set titlestring=[DEBUG] 
 )
 title %titlestring%Chopin MIUI 14 / 13 / 12 Flasher Script v%ver% - avalibeyaz.com/github
-cls
 goto lang
 
 :lang
