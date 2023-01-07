@@ -1,5 +1,8 @@
 CHANGELOG:  
   
+v1.2.2:  
+-Fixed critical bug  
+  
 v1.2.1:  
 -Removed select MIUI option  
 -Codes cleaned!  
