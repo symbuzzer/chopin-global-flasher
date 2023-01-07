@@ -37,7 +37,6 @@ set msg_askuserdata1=If you want to do flash a different region ROM, you should 
 set msg_askuserdata2=Do you want to ERASE USERDATA [Y/N]?
 set msg_erasinguserdata=Erasing USERDATA!
 set msg_savinguserdata=Saving USERDATA!
-set msg_selectversion=Select the MIUI version of the rom to be flashed and press Enter [14/13/12]:
 set msg_flashing=Flashing MIUI...
 set msg_success=Success!
 set msg_askverity=Do you want to DISABLE VERITY [Y/N]?
@@ -61,7 +60,6 @@ set msg_askuserdata1=Eger baska bir bolgeye ait ROM yukleyecekseniz USERDATA'yi 
 set msg_askuserdata2=USERDATA'yi formatlamak ister misiniz [Y/N]?
 set msg_erasinguserdata=USERDATA siliniyor!
 set msg_savinguserdata=USERDATA silinmedi!
-set msg_selectversion=Yuklenecek MIUI versiyonunu secip Enter'e basin [14/13/12]:
 set msg_flashing=MIUI yukleniyor...
 set msg_success=Basarili!
 set msg_askverity=VERITY'i kapatmak ister misiniz [Y/N]?
@@ -85,7 +83,6 @@ set msg_askuserdata1=Jika Anda ingin melakukan flash ROM wilayah yang berbeda, A
 set msg_askuserdata2=Apakah Anda ingin MENGHAPUS USERDATA [Y/N]?
 set msg_erasinguserdata=Menghapus USERDATA!
 set msg_savinguserdata=Menyimpan USERDATA!
-set msg_selectversion=Pilih versi MIUI dari rom yang akan di-flash dan tekan Enter [14/13/12]:
 set msg_flashing=Flash MIUI...
 set msg_success=Berhasil!
 set msg_askverity=Apakah Anda ingin MENONAKTIFKAN VERITAS [Y/N]?
@@ -181,29 +178,6 @@ goto romselect
 :noterase
 echo %msg_savinguserdata%
 echo.
-goto romselect
-
-:romselect
-set /P r=%msg_selectversion%
-if /I "%r%" EQU "14" goto startflashing14
-if /I "%r%" EQU "13" goto startflashing13
-if /I "%r%" EQU "12" goto startflashing12
-if /I "%c%" EQU "D" goto debug
-goto romselect
-
-:startflashing14
-echo %msg_flashing%
-:: Add MIUI %c% specific flash commands there if exists
-goto startflashing
-
-:startflashing13
-echo %msg_flashing%
-:: Add MIUI %c% specific flash commands there if exists
-goto startflashing
-
-:startflashing12
-echo %msg_flashing%
-:: Add MIUI %c% specific flash commands there if exists
 goto startflashing
 
 :startflashing
