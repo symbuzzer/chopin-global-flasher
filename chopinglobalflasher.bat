@@ -1,5 +1,5 @@
 @echo off
-set ver=1.2.1
+set ver=1.2.2
 set debug=0
 
 :head
@@ -173,7 +173,7 @@ if not "%debug%"=="1" (
  fastboot flash userdata images\userdata.img || @echo "Flash userdata error"
 )
 echo.
-goto romselect
+goto startflashing
 
 :noterase
 echo %msg_savinguserdata%
@@ -181,6 +181,7 @@ echo.
 goto startflashing
 
 :startflashing
+echo %msg_flashing%
 if not "%debug%"=="1" (
  if exist images\boot.img fastboot erase boot_ab || @echo "Erase boot error"
  fastboot erase expdb || @echo "Erase expdb error"
