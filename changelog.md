@@ -1,5 +1,11 @@
 CHANGELOG:  
   
+v1.3.0:  
+-Added Xiaomi.eu rom support  
+-Added infrastructure for checking device  
+-Fixed delete userdata function  
+-Fixed several bugs and typos  
+  
 v1.2.2:  
 -Fixed critical bug  
   
