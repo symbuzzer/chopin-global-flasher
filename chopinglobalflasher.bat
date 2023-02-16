@@ -1,5 +1,5 @@
 @echo off
-set ver=1.2.2
+set ver=1.3.0
 set debug=0
 
 :head
@@ -48,6 +48,16 @@ set msg_notbllock=Bootloader lock skipped!
 set msg_romerr1=Make sure extract "images" folder of fastboot ROM's tgz file and rerun script again.
 set msg_romerr2=You can open fastboot ROM's tgz file via Winrar.
 set msg_reboot=Press Enter to reboot your phone...
+set msg_notchopin=Device is not Chopin!
+set msg_exit=Press Enter to exit...
+set msg_found=found
+set msg_notfound=not found
+set msg_eraseerror=erase error
+set msg_flasherror=flash error
+set msg_activateaerror=set_active a error
+set msg_verityerror=Disable verity is not success. Check vbmeta.img
+set msg_bllockerror=Bootloader lock error
+set msg_vbmeta=vbmeta.img not found, skipping disable verity option
 goto welcome
 
 :turkish
@@ -62,7 +72,7 @@ set msg_erasinguserdata=USERDATA siliniyor!
 set msg_savinguserdata=USERDATA silinmedi!
 set msg_flashing=MIUI yukleniyor...
 set msg_success=Basarili!
-set msg_askverity=VERITY'i kapatmak ister misiniz [Y/N]?
+set msg_askverity=Verity'i kapatmak ister misiniz [Y/N]?
 set msg_verity=Verity kapatildi!
 set msg_notverity=Verity kapatilmadi!
 set msg_askbllock=BOOTLOADER kilitlensin mi [Y/N]?
@@ -71,6 +81,16 @@ set msg_notbllock=Bootloader kilitlenmedi!
 set msg_romerr1=Fastboot ROM'unun tgz dosyasindaki "images" klasorunu cikarttiğiniza emin olun ve skripti tekrar calistirin.
 set msg_romerr2=Fastboot ROM'unun tgz dosyasini Winrar ile acabilirsiniz.
 set msg_reboot=Telefonunuzu yeniden baslatmak icin Enter'a basin...
+set msg_notchopin=Cihaz Chopin degil!
+set msg_exit=Cikmak icin Enter'a basin...
+set msg_found=bulundu
+set msg_notfound=bulunamadi
+set msg_eraseerror=silinemedi
+set msg_flasherror=flaslanamadi
+set msg_activateaerror=set_active a hatasi
+set msg_verityerror=Verity kapatilamadi. vbmeta.img'i kontrol edin
+set msg_bllockerror=Bootloader kilitlenemedi
+set msg_vbmeta=vbmeta.img bulunamadi, verity kapatma secenegi atlaniyor
 goto welcome
 
 :indonesian
@@ -94,6 +114,17 @@ set msg_notbllock=Kunci bootloader dilewati!
 set msg_romerr1=Pastikan ekstrak folder "images" dari file tgz ROM fastboot dan jalankan kembali skrip.
 set msg_romerr2=Anda dapat membuka file tgz fastboot ROM melalui Winrar.
 set msg_reboot=Tekan Enter untuk mem-boot ulang ponsel Anda...
+
+set msg_notchopin=Device is not Chopin!
+set msg_exit=Press Enter to exit...
+set msg_found=found
+set msg_notfound=not found
+set msg_eraseerror=erase error
+set msg_flasherror=flash error
+set msg_activateaerror=set_active a error
+set msg_verityerror=Disable verity is not success. Check vbmeta.img
+set msg_bllockerror=Bootloader lock error
+set msg_vbmeta=vbmeta.img not found, skipping disable verity option
 goto welcome
 
 :debug
@@ -120,41 +151,44 @@ if /I "%c%" EQU "D" goto debug
 goto romconfirm
 
 :checkromfiles
-if not "%debug%"=="1" (
- if not exist images\lk.img goto notfound
- if not exist images\dpm.img goto notfound
- if not exist images\preloader_chopin.bin goto notfound
- if not exist images\tee.img goto notfound
- if not exist images\mitee.img goto notfound
- if not exist images\sspm.img goto notfound
- if not exist images\gz.img goto notfound
- if not exist images\scp.img goto notfound
- if not exist images\logo.bin goto notfound
- if not exist images\dtbo.img goto notfound
- if not exist images\spmfw.img goto notfound
- if not exist images\mcupm.img goto notfound
- if not exist images\pi_img.img goto notfound
- if not exist images\md1img.img goto notfound
- if not exist images\cam_vpu1.img goto notfound
- if not exist images\cam_vpu2.img goto notfound
- if not exist images\cam_vpu3.img goto notfound
- if not exist images\audio_dsp.img goto notfound
- if not exist images\super.img (
-  if not exist images\bhlnk.img goto notfound
- )
- if not exist images\rescue.img goto notfound
- if not exist images\cust.img goto notfound
- if not exist images\vbmeta.img goto notfound
- if not exist images\vbmeta_system.img goto notfound
- if not exist images\vbmeta_vendor.img goto notfound
- if not exist images\userdata.img goto notfound
- if not exist images\boot.img goto notfound
-)
-echo %msg_romok%
-goto userdata
+if exist images\lk.img (@echo  +lk.img %msg_found%) else (@echo  -lk.img %msg_notfound%)
+if exist images\dpm.img (@echo  +dpm.img %msg_found%) else (@echo  -dpm.img %msg_notfound%)
+if exist images\preloader_chopin.bin (@echo  +preloader_chopin.bin %msg_found%) else (@echo  -preloader_chopin.bin %msg_notfound%)
+if exist images\preloader_raw.img (@echo  +preloader_raw.img %msg_found%) else (@echo  -preloader_raw.img %msg_notfound%)
+if exist images\tee.img (@echo  +tee.img %msg_found%) else (@echo  -tee.img %msg_notfound%)
+if exist images\mitee.img (@echo  +mitee.img %msg_found%) else (@echo  -mitee.img %msg_notfound%)
+if exist images\sspm.img (@echo  +sspm.img %msg_found%) else (@echo  -sspm.img %msg_notfound%)
+if exist images\gz.img (@echo  +gz.img %msg_found%) else (@echo  -gz.img %msg_notfound%)
+if exist images\scp.img (@echo  +scp.img %msg_found%) else (@echo  -scp.img %msg_notfound%)
+if exist images\logo.bin (@echo  +logo.bin %msg_found%) else (@echo  -logo.bin %msg_notfound%)
+if exist images\dtbo.img (@echo  +dtbo.img %msg_found%) else (@echo  -dtbo.img %msg_notfound%)
+if exist images\spmfw.img (@echo  +spmfw.img %msg_found%) else (@echo  -spmfw.img %msg_notfound%)
+if exist images\mcupm.img (@echo  +mcupm.img %msg_found%) else (@echo  -mcupm.img %msg_notfound%)
+if exist images\pi_img.img (@echo  +pi_img.img %msg_found%) else (@echo  -pi_img.img %msg_notfound%)
+if exist images\md1img.img (@echo  +md1img.img %msg_found%) else (@echo  -md1img.img %msg_notfound%)
+if exist images\cam_vpu1.img (@echo  +cam_vpu1.img %msg_found%) else (@echo  -cam_vpu1.img %msg_notfound%)
+if exist images\cam_vpu2.img (@echo  +cam_vpu2.img %msg_found%) else (@echo  -cam_vpu2.img %msg_notfound%)
+if exist images\cam_vpu3.img (@echo  +cam_vpu3.img %msg_found%) else (@echo  -cam_vpu3.img %msg_notfound%)
+if exist images\audio_dsp.img (@echo  +audio_dsp.img %msg_found%) else (@echo  -audio_dsp.img %msg_notfound%)
+if exist images\super.img (@echo  +super.img %msg_found%) else (@echo  -super.img %msg_notfound%)
+if exist images\bhlnk.img (@echo  +bhlnk.img %msg_found%) else (@echo  -bhlnk.img %msg_notfound%)
+if exist images\rescue.img (@echo  +rescue.img %msg_found%) else (@echo  -rescue.img %msg_notfound%)
+if exist images\cust.img (@echo  +cust.img %msg_found%) else (@echo  -cust.img %msg_notfound%)
+if exist images\vbmeta.img (@echo  +vbmeta.img %msg_found%) else (@echo  -vbmeta.img %msg_notfound%)
+if exist images\vbmeta_system.img (@echo  +vbmeta_system.img %msg_found%) else (@echo  -vbmeta_system.img %msg_notfound%)
+if exist images\vbmeta_vendor.img (@echo  +vbmeta_vendor.img %msg_found%) else (@echo  -vbmeta_vendor.img %msg_notfound%)
+if exist images\userdata.img (@echo  +userdata.img %msg_found%) else (@echo  -userdata.img %msg_notfound%)
+if exist images\boot.img (@echo  +boot.img %msg_found%) else (@echo  -boot.img %msg_notfound%)
+goto checkdevice
 
 :notcheckromfiles
 echo %msg_romskip%
+goto checkdevice
+
+:checkdevice
+if not "%debug%"=="1" (
+echo Will add device check here in future releases > nul
+)
 goto userdata
 
 :userdata
@@ -169,8 +203,10 @@ goto userdata
 :erase
 echo %msg_erasinguserdata%
 if not "%debug%"=="1" (
- fastboot erase metadata || @echo "Erase metadata error"
- fastboot flash userdata images\userdata.img || @echo "Flash userdata error"
+ fastboot erase metadata || @echo  -metadata %msg_eraseerror%
+ fastboot erase userdata || @echo  -userdata %msg_eraseerror%
+ fastboot erase expdb || @echo  -expdb %msg_eraseerror%
+ fastboot flash userdata images\userdata.img || @echo  -userdata %msg_flasherror%
 )
 echo.
 goto startflashing
@@ -183,46 +219,56 @@ goto startflashing
 :startflashing
 echo %msg_flashing%
 if not "%debug%"=="1" (
- if exist images\boot.img fastboot erase boot_ab || @echo "Erase boot error"
- fastboot erase expdb || @echo "Erase expdb error"
- fastboot flash preloader_ab images\preloader_chopin.bin  || @echo "Flash preloader error"
- fastboot flash lk_ab images\lk.img || @echo "Flash lk_ab error"
- fastboot flash dpm_ab images\dpm.img || @echo "Flash dpm_ab error"
- fastboot flash tee_ab images\tee.img || @echo "Flash tee_ab error"
- fastboot flash mitee_ab images\mitee.img || @echo "Flash mitee_ab error"
- fastboot flash sspm_ab images\sspm.img || @echo "Flash sspm_ab error"
- fastboot flash gz_ab images\gz.img || @echo "Flash gz_ab error"
- fastboot flash scp_ab images\scp.img || @echo "Flash scp_ab error"
- fastboot flash logo images\logo.bin || @echo "Flash logo error"
- fastboot flash dtbo_ab images\dtbo.img || @echo "Flash dtbo_ab error"
- fastboot flash spmfw_ab images\spmfw.img || @echo "Flash spmfw_ab error"
- fastboot flash mcupm_ab images\mcupm.img || @echo "Flash mcupm_ab error"
- fastboot flash pi_img_ab images\pi_img.img || @echo "Flash pi_img_ab error"
- fastboot flash md1img_ab images\md1img.img || @echo "Flash md1img_ab error"
- fastboot flash cam_vpu1_ab images\cam_vpu1.img || @echo "Flash cam_vpu1_ab error"
- fastboot flash cam_vpu2_ab images\cam_vpu2.img || @echo "Flash cam_vpu2_ab error"
- fastboot flash cam_vpu3_ab images\cam_vpu3.img || @echo "Flash cam_vpu3_ab error"
- fastboot flash audio_dsp_ab images\audio_dsp.img  || @echo "Flash audio_dsp error"
+ fastboot set_active a || @echo  -%msg_activateaerror%
+ if exist images\boot.img fastboot erase boot_ab || @echo  -boot %msg_eraseerror%
+ if exist images\preloader_chopin.bin (
+  fastboot flash preloader_ab images\preloader_chopin.bin || @echo  -preloader %msg_flasherror%
+ )
+ if exist images\preloader_raw.img (
+  fastboot flash preloader_ab images\preloader_raw.img || @echo  -preloader %msg_flasherror%
+ )
+ fastboot flash lk_ab images\lk.img || @echo  -lk_ab %msg_flasherror%
+ fastboot flash dpm_ab images\dpm.img || @echo  -dpm_ab %msg_flasherror%
+ fastboot flash tee_ab images\tee.img || @echo  -tee_ab %msg_flasherror%
+ fastboot flash mitee_ab images\mitee.img || @echo  -mitee_ab %msg_flasherror%
+ fastboot flash sspm_ab images\sspm.img || @echo  -sspm_ab %msg_flasherror%
+ fastboot flash gz_ab images\gz.img || @echo  -gz_ab %msg_flasherror%
+ fastboot flash scp_ab images\scp.img || @echo  -scp_ab %msg_flasherror%
+ fastboot flash logo images\logo.bin || @echo  -logo %msg_flasherror%
+ fastboot flash dtbo_ab images\dtbo.img || @echo  -dtbo_ab %msg_flasherror%
+ fastboot flash spmfw_ab images\spmfw.img || @echo  -spmfw_ab %msg_flasherror%
+ fastboot flash mcupm_ab images\mcupm.img || @echo  -mcupm_ab %msg_flasherror%
+ fastboot flash pi_img_ab images\pi_img.img || @echo  -pi_img_ab %msg_flasherror%
+ fastboot flash md1img_ab images\md1img.img || @echo  -md1img_ab %msg_flasherror%
+ fastboot flash cam_vpu1_ab images\cam_vpu1.img || @echo  -cam_vpu1_ab %msg_flasherror%
+ fastboot flash cam_vpu2_ab images\cam_vpu2.img || @echo  -cam_vpu2_ab %msg_flasherror%
+ fastboot flash cam_vpu3_ab images\cam_vpu3.img || @echo  -cam_vpu3_ab %msg_flasherror%
+ fastboot flash audio_dsp_ab images\audio_dsp.img || @echo  -audio_dsp %msg_flasherror%
  if exist images\super.img (
-  fastboot flash super images\super.img || @echo "Flash super error"
+  fastboot flash super images\super.img || @echo  -super %msg_flasherror%
  )
  if exist images\bhlnk.img (
-  fastboot flash super images\bhlnk.img || @echo "Flash bhlnk error"
+  fastboot flash super images\bhlnk.img || @echo  -bhlnk %msg_flasherror%
  )
- fastboot flash rescue images\rescue.img || @echo "Flash rescue error"
- fastboot flash vbmeta_ab images\vbmeta.img || @echo "Flash vbmeta_ab error"
- fastboot flash vbmeta_system_ab images\vbmeta_system.img || @echo "Flash vbmeta_system_ab error"
- fastboot flash vbmeta_vendor_ab images\vbmeta_vendor.img || @echo "Flash vbmeta_vendor_ab error"
- fastboot flash cust images\cust.img || @echo "Flash cust error"
- fastboot flash boot_ab images\boot.img || @echo "Flash boot_ab error"
+ fastboot flash rescue images\rescue.img || @echo  -rescue %msg_flasherror%
+ fastboot flash vbmeta_ab images\vbmeta.img || @echo  -vbmeta_ab %msg_flasherror%
+ fastboot flash vbmeta_system_ab images\vbmeta_system.img || @echo  -vbmeta_system_ab %msg_flasherror%
+ fastboot flash vbmeta_vendor_ab images\vbmeta_vendor.img || @echo  -vbmeta_vendor_ab %msg_flasherror%
+ fastboot flash cust images\cust.img || @echo  -cust %msg_flasherror%
+ fastboot flash boot_ab images\boot.img || @echo  -boot_ab %msg_flasherror%
  fastboot oem cdms
- fastboot set_active a || @echo "set_active a error"
- fastboot reboot || @echo "Reboot error"
 )
 echo.
-echo %msg_success%
-echo.
-goto verityconfirm
+goto checkverity
+
+:checkverity
+if exist images\vbmeta.img (
+ goto verityconfirm
+) else (
+ echo %msg_vbmeta%
+ echo.
+ goto bllockconfirm
+)
 
 :verityconfirm
 set /P c=%msg_askverity%
@@ -233,7 +279,7 @@ goto verityconfirm
 
 :verity
 if not "%debug%"=="1" (
- fastboot flash vbmeta --disable-verity --disable-verification vbmeta.img || @echo "Disable verity is not success. Check vbmeta.img"
+ fastboot flash vbmeta --disable-verity --disable-verification images\vbmeta.img || @echo %msg_verityerror%
 )
 echo %msg_verity%
 echo.
@@ -253,27 +299,32 @@ goto bllockconfirm
 
 :bllock
 if not "%debug%"=="1" (
- fastboot flash oem lock || @echo "Bootloader lock error"
+ fastboot flash oem lock || @echo %msg_bllockerror%
 )
 echo %msg_bllock%
 echo.
 goto exit
 
-:notverity
+:notbllock
 echo %msg_notbllock%
 echo.
 goto exit
 
-:notfound
-echo %msg_romerr1%
-echo %msg_romerr2%
-pause
+:notchopin
+echo %msg_notchopin%
+echo %msg_exit%
+pause > nul
 exit
 
 :exit
 echo %msg_reboot%
+echo.
+pause > nul
 if not "%debug%"=="1" (
  fastboot reboot
 )
+echo %msg_success%
+echo.
+echo %msg_exit%
 pause > nul
 exit
