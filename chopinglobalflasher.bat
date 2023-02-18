@@ -58,6 +58,7 @@ set msg_activateaerror=set_active a error
 set msg_verityerror=Disable verity is not success. Check vbmeta.img
 set msg_bllockerror=Bootloader lock error
 set msg_vbmeta=vbmeta.img not found, skipping disable verity option
+set msg_patreon=Do you want to support developer [Y/N]?
 goto welcome
 
 :turkish
@@ -91,6 +92,7 @@ set msg_activateaerror=set_active a hatasi
 set msg_verityerror=Verity kapatilamadi. vbmeta.img'i kontrol edin
 set msg_bllockerror=Bootloader kilitlenemedi
 set msg_vbmeta=vbmeta.img bulunamadi, verity kapatma secenegi atlaniyor
+set msg_patreon=Gelistiriciyi desteklemek ister misiniz [Y/N]?
 goto welcome
 
 :indonesian
@@ -124,6 +126,7 @@ set msg_activateaerror=kesalahan set_active a
 set msg_verityerror=Penonaktifan verity gagal. Periksa vbmeta.img
 set msg_bllockerror=Kesalahan penguncian bootloader
 set msg_vbmeta=vbmeta.img tidak ditemukan, lewati opsi nonaktifkan kebenaran
+set msg_patreon=Apakah Anda ingin mendukung pengembang [Y/N]?
 goto welcome
 
 :debug
@@ -317,7 +320,6 @@ exit
 
 :reboot
 echo %msg_reboot%
-echo.
 pause > nul
 if not "%debug%"=="1" (
  fastboot reboot
@@ -333,6 +335,7 @@ if /I "%c%" EQU "N" goto exit
 if /I "%c%" EQU "D" goto debug
 
 :exit
+echo.
 echo %msg_exit%
 pause > nul
 exit
