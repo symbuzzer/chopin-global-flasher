@@ -1,5 +1,8 @@
 CHANGELOG:  
   
+v1.3.1:  
+-Translated some Indonesian strings    
+  
 v1.3.0:  
 -Added Xiaomi.eu rom support  
 -Added infrastructure for checking device  
