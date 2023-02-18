@@ -1,5 +1,5 @@
 @echo off
-set ver=1.3.1
+set ver=1.3.2
 set debug=0
 
 :head
@@ -302,12 +302,12 @@ if not "%debug%"=="1" (
 )
 echo %msg_bllock%
 echo.
-goto exit
+goto reboot
 
 :notbllock
 echo %msg_notbllock%
 echo.
-goto exit
+goto reboot
 
 :notchopin
 echo %msg_notchopin%
@@ -315,7 +315,7 @@ echo %msg_exit%
 pause > nul
 exit
 
-:exit
+:reboot
 echo %msg_reboot%
 echo.
 pause > nul
@@ -324,6 +324,15 @@ if not "%debug%"=="1" (
 )
 echo %msg_success%
 echo.
+goto patreon
+
+:patreon
+set /P c=%msg_patreon%
+if /I "%c%" EQU "Y" start "" "https://avalibeyaz.com/patreon"
+if /I "%c%" EQU "N" goto exit
+if /I "%c%" EQU "D" goto debug
+
+:exit
 echo %msg_exit%
 pause > nul
 exit
