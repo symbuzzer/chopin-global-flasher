@@ -1,5 +1,5 @@
 @echo off
-set ver=1.3.0
+set ver=1.3.1
 set debug=0
 
 :head
@@ -114,17 +114,16 @@ set msg_notbllock=Kunci bootloader dilewati!
 set msg_romerr1=Pastikan ekstrak folder "images" dari file tgz ROM fastboot dan jalankan kembali skrip.
 set msg_romerr2=Anda dapat membuka file tgz fastboot ROM melalui Winrar.
 set msg_reboot=Tekan Enter untuk mem-boot ulang ponsel Anda...
-
-set msg_notchopin=Device is not Chopin!
-set msg_exit=Press Enter to exit...
-set msg_found=found
-set msg_notfound=not found
-set msg_eraseerror=erase error
-set msg_flasherror=flash error
-set msg_activateaerror=set_active a error
-set msg_verityerror=Disable verity is not success. Check vbmeta.img
-set msg_bllockerror=Bootloader lock error
-set msg_vbmeta=vbmeta.img not found, skipping disable verity option
+set msg_notchopin=Perangkat bukan Chopin!
+set msg_exit=Tekan Enter untuk keluar...
+set msg_found=ditemukan
+set msg_notfound=tidak ditemukan
+set msg_eraseerror=kesalahan penghapusan
+set msg_flasherror=kesalahan flash
+set msg_activateaerror=kesalahan set_active a
+set msg_verityerror=Penonaktifan verity gagal. Periksa vbmeta.img
+set msg_bllockerror=Kesalahan penguncian bootloader
+set msg_vbmeta=vbmeta.img tidak ditemukan, lewati opsi nonaktifkan kebenaran
 goto welcome
 
 :debug
