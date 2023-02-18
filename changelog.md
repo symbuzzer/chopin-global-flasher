@@ -1,5 +1,8 @@
 CHANGELOG:  
   
+v1.3.2:  
+-Added support developer option  
+  
 v1.3.1:  
 -Translated some Indonesian strings    
   
