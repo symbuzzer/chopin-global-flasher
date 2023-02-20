@@ -1,5 +1,8 @@
 CHANGELOG:  
   
+v1.3.3:  
+-Added MIUI dev and beta roms  
+  
 v1.3.2:  
 -Added support developer option  
   
