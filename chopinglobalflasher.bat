@@ -1,5 +1,5 @@
 @echo off
-set ver=1.3.2
+set ver=1.3.3
 set debug=0
 
 :head
@@ -173,9 +173,35 @@ if exist images\cam_vpu2.img (@echo  +cam_vpu2.img %msg_found%) else (@echo  -ca
 if exist images\cam_vpu3.img (@echo  +cam_vpu3.img %msg_found%) else (@echo  -cam_vpu3.img %msg_notfound%)
 if exist images\audio_dsp.img (@echo  +audio_dsp.img %msg_found%) else (@echo  -audio_dsp.img %msg_notfound%)
 if exist images\super.img (@echo  +super.img %msg_found%) else (@echo  -super.img %msg_notfound%)
+if exist images\super.img.1 (@echo  +super.img.1 %msg_found%) else (@echo  -super.img.1 %msg_notfound%)
+if exist images\super.img.2 (@echo  +super.img.2 %msg_found%) else (@echo  -super.img.2 %msg_notfound%)
+if exist images\super.img.3 (@echo  +super.img.3 %msg_found%) else (@echo  -super.img.3 %msg_notfound%)
+if exist images\super.img.4 (@echo  +super.img.4 %msg_found%) else (@echo  -super.img.4 %msg_notfound%)
+if exist images\super.img.5 (@echo  +super.img.5 %msg_found%) else (@echo  -super.img.5 %msg_notfound%)
+if exist images\super.img.6 (@echo  +super.img.6 %msg_found%) else (@echo  -super.img.6 %msg_notfound%)
+if exist images\super.img.7 (@echo  +super.img.7 %msg_found%) else (@echo  -super.img.7 %msg_notfound%)
+if exist images\super.img.8 (@echo  +super.img.8 %msg_found%) else (@echo  -super.img.8 %msg_notfound%)
+if exist images\super.img.9 (@echo  +super.img.9 %msg_found%) else (@echo  -super.img.9 %msg_notfound%)
+if exist images\super.img.10 (@echo  +super.img.10 %msg_found%) else (@echo  -super.img.10 %msg_notfound%)
+if exist images\super.img.11 (@echo  +super.img.11 %msg_found%) else (@echo  -super.img.11 %msg_notfound%)
+if exist images\super.img.12 (@echo  +super.img.12 %msg_found%) else (@echo  -super.img.12 %msg_notfound%)
+if exist images\super.img.13 (@echo  +super.img.13 %msg_found%) else (@echo  -super.img.13 %msg_notfound%)
+if exist images\super.img.14 (@echo  +super.img.14 %msg_found%) else (@echo  -super.img.14 %msg_notfound%)
+if exist images\super.img.15 (@echo  +super.img.15 %msg_found%) else (@echo  -super.img.15 %msg_notfound%)
+if exist images\super.img.16 (@echo  +super.img.16 %msg_found%) else (@echo  -super.img.16 %msg_notfound%)
+if exist images\super.img.17 (@echo  +super.img.17 %msg_found%) else (@echo  -super.img.17 %msg_notfound%)
+if exist images\super.img.18 (@echo  +super.img.18 %msg_found%) else (@echo  -super.img.18 %msg_notfound%)
+if exist images\super.img.19 (@echo  +super.img.19 %msg_found%) else (@echo  -super.img.19 %msg_notfound%)
+if exist images\super.img.20 (@echo  +super.img.20 %msg_found%) else (@echo  -super.img.20 %msg_notfound%)
+if exist images\super.img.21 (@echo  +super.img.21 %msg_found%) else (@echo  -super.img.21 %msg_notfound%)
+if exist images\super.img.22 (@echo  +super.img.22 %msg_found%) else (@echo  -super.img.22 %msg_notfound%)
+if exist images\super.img.23 (@echo  +super.img.23 %msg_found%) else (@echo  -super.img.23 %msg_notfound%)
+if exist images\super.img.24 (@echo  +super.img.24 %msg_found%) else (@echo  -super.img.24 %msg_notfound%)
 if exist images\bhlnk.img (@echo  +bhlnk.img %msg_found%) else (@echo  -bhlnk.img %msg_notfound%)
 if exist images\rescue.img (@echo  +rescue.img %msg_found%) else (@echo  -rescue.img %msg_notfound%)
 if exist images\cust.img (@echo  +cust.img %msg_found%) else (@echo  -cust.img %msg_notfound%)
+if exist images\cust.img.1 (@echo  +cust.img.1 %msg_found%) else (@echo  -cust.img.1 %msg_notfound%)
+if exist images\cust.img.2 (@echo  +cust.img.2 %msg_found%) else (@echo  -cust.img.2 %msg_notfound%)
 if exist images\vbmeta.img (@echo  +vbmeta.img %msg_found%) else (@echo  -vbmeta.img %msg_notfound%)
 if exist images\vbmeta_system.img (@echo  +vbmeta_system.img %msg_found%) else (@echo  -vbmeta_system.img %msg_notfound%)
 if exist images\vbmeta_vendor.img (@echo  +vbmeta_vendor.img %msg_found%) else (@echo  -vbmeta_vendor.img %msg_notfound%)
@@ -246,18 +272,67 @@ if not "%debug%"=="1" (
  fastboot flash cam_vpu2_ab images\cam_vpu2.img || @echo  -cam_vpu2_ab %msg_flasherror%
  fastboot flash cam_vpu3_ab images\cam_vpu3.img || @echo  -cam_vpu3_ab %msg_flasherror%
  fastboot flash audio_dsp_ab images\audio_dsp.img || @echo  -audio_dsp %msg_flasherror%
+ fastboot flash rescue images\rescue.img || @echo  -rescue %msg_flasherror%
+ fastboot flash vbmeta_ab images\vbmeta.img || @echo  -vbmeta_ab %msg_flasherror%
+ fastboot flash vbmeta_system_ab images\vbmeta_system.img || @echo  -vbmeta_system_ab %msg_flasherror%
+ fastboot flash vbmeta_vendor_ab images\vbmeta_vendor.img || @echo  -vbmeta_vendor_ab %msg_flasherror%
+ fastboot flash boot_ab images\boot.img || @echo  -boot_ab %msg_flasherror%
+ if exist images\cust.img (
+  fastboot flash cust images\cust.img || @echo  -cust %msg_flasherror%
+ ) else (
+  fastboot flash cust images\cust.img.1 || @echo  -cust1 %msg_flasherror%
+  fastboot flash cust images\cust.img.2 || @echo  -cust2 %msg_flasherror%
+ )
  if exist images\super.img (
   fastboot flash super images\super.img || @echo  -super %msg_flasherror%
  )
  if exist images\bhlnk.img (
   fastboot flash super images\bhlnk.img || @echo  -bhlnk %msg_flasherror%
  )
- fastboot flash rescue images\rescue.img || @echo  -rescue %msg_flasherror%
- fastboot flash vbmeta_ab images\vbmeta.img || @echo  -vbmeta_ab %msg_flasherror%
- fastboot flash vbmeta_system_ab images\vbmeta_system.img || @echo  -vbmeta_system_ab %msg_flasherror%
- fastboot flash vbmeta_vendor_ab images\vbmeta_vendor.img || @echo  -vbmeta_vendor_ab %msg_flasherror%
- fastboot flash cust images\cust.img || @echo  -cust %msg_flasherror%
- fastboot flash boot_ab images\boot.img || @echo  -boot_ab %msg_flasherror%
+ if exist images\super.img.1 (
+  fastboot flash super images\super.img.1 || @echo  -super1 %msg_flasherror%
+  fastboot flash super images\super.img.2 || @echo  -super2 %msg_flasherror%
+  fastboot flash super images\super.img.3 || @echo  -super3 %msg_flasherror%
+  fastboot flash super images\super.img.4 || @echo  -super4 %msg_flasherror%
+  fastboot flash super images\super.img.5 || @echo  -super5 %msg_flasherror%
+  fastboot flash super images\super.img.6 || @echo  -super6 %msg_flasherror%
+  fastboot flash super images\super.img.7 || @echo  -super7 %msg_flasherror%
+  fastboot flash super images\super.img.8 || @echo  -super8 %msg_flasherror%
+  fastboot flash super images\super.img.9 || @echo  -super9 %msg_flasherror%
+  fastboot flash super images\super.img.10 || @echo  -super10 %msg_flasherror%
+  fastboot flash super images\super.img.11 || @echo  -super11 %msg_flasherror%
+  fastboot flash super images\super.img.12 || @echo  -super12 %msg_flasherror%
+  fastboot flash super images\super.img.13 || @echo  -super13 %msg_flasherror%
+  fastboot flash super images\super.img.14 || @echo  -super14 %msg_flasherror%
+  fastboot flash super images\super.img.15 || @echo  -super15 %msg_flasherror%
+  fastboot flash super images\super.img.16 || @echo  -super16 %msg_flasherror%
+  fastboot flash super images\super.img.17 || @echo  -super17 %msg_flasherror%
+  fastboot flash super images\super.img.18 || @echo  -super18 %msg_flasherror%
+  fastboot flash super images\super.img.19 || @echo  -super19 %msg_flasherror%
+  fastboot flash super images\super.img.20 || @echo  -super20 %msg_flasherror%
+  fastboot flash super images\super.img.21 || @echo  -super21 %msg_flasherror%
+  fastboot flash super images\super.img.22 || @echo  -super22 %msg_flasherror%
+  fastboot flash super images\super.img.23 || @echo  -super23 %msg_flasherror%
+  fastboot flash super images\super.img.24 || @echo  -super24 %msg_flasherror%
+ )
+ if exist images\super.img.25 (
+  fastboot flash super images\super.img.25 || @echo  -super25 %msg_flasherror%
+ )
+ if exist images\super.img.26 (
+  fastboot flash super images\super.img.26 || @echo  -super26 %msg_flasherror%
+ )
+ if exist images\super.img.27 (
+  fastboot flash super images\super.img.27 || @echo  -super27 %msg_flasherror%
+ )
+ if exist images\super.img.28 (
+  fastboot flash super images\super.img.28 || @echo  -super28 %msg_flasherror%
+ )
+ if exist images\super.img.29 (
+  fastboot flash super images\super.img.29 || @echo  -super29 %msg_flasherror%
+ )
+ if exist images\super.img.30 (
+  fastboot flash super images\super.img.30 || @echo  -super30 %msg_flasherror%
+ )
  fastboot oem cdms
 )
 echo.
