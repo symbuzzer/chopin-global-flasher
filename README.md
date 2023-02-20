@@ -9,4 +9,5 @@ HOW TO USE:
 NOTES:   
 - Works all MIUI fastboot roms included 14,13 and 12 stable, beta and dev builds. Also works with VIETSUB and XIAOMI.EU custom roms.  
 - Device should be bootloader unlocked  
+- Don't lock bootloader if you flashed another rom except official MIUI firmware for device region!  
 - You can download Android Platform Tools from: https://developer.android.com/studio/releases/platform-tools  
