@@ -173,7 +173,7 @@ if exist images\cam_vpu2.img (@echo  +cam_vpu2.img %msg_found%) else (@echo  -ca
 if exist images\cam_vpu3.img (@echo  +cam_vpu3.img %msg_found%) else (@echo  -cam_vpu3.img %msg_notfound%)
 if exist images\audio_dsp.img (@echo  +audio_dsp.img %msg_found%) else (@echo  -audio_dsp.img %msg_notfound%)
 if exist images\super.img (@echo  +super.img %msg_found%) else (@echo  -super.img %msg_notfound%)
-if exist images\super.img.0 (@echo  +super.img.1 %msg_found%) else (@echo  -super.img.1 %msg_notfound%)
+if exist images\super.img.0 (@echo  +super.img.0 %msg_found%) else (@echo  -super.img.0 %msg_notfound%)
 if exist images\super.img.1 (@echo  +super.img.1 %msg_found%) else (@echo  -super.img.1 %msg_notfound%)
 if exist images\super.img.2 (@echo  +super.img.2 %msg_found%) else (@echo  -super.img.2 %msg_notfound%)
 if exist images\super.img.3 (@echo  +super.img.3 %msg_found%) else (@echo  -super.img.3 %msg_notfound%)
