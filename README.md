@@ -7,6 +7,6 @@ HOW TO USE:
 -Double click to run *.bat file and follow instructions  
   
 NOTES:   
--Works all MIUI roms included 14,13 and 12. Also works with VIETSUB and XIAOMI.EU custom roms.  
+-Works all MIUI fastboot roms included 14,13 and 12 stable, beta and dev builds. Also works with VIETSUB and XIAOMI.EU custom roms.  
 -Device should be bootloader unlocked  
 -You can download Android Platform Tools from: https://developer.android.com/studio/releases/platform-tools  
