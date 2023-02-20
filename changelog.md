@@ -1,5 +1,8 @@
 # CHANGELOG:  
   
+v1.3.4:  
+- Fixed critical bug  
+  
 v1.3.3:  
 - Added MIUI dev and beta roms  
   
